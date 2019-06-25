@@ -27,15 +27,14 @@ for i in range(NDsystems):
 		MeterArg = 'triplex_meter' + arg.split('house')[1]
 		TriplexNodeArg = 'triplex_node' + arg.split('house')[1]
 		
+		print ("publish \"commit:" + arg + ".system_mode -> " + arg + "/system_mode\";", file=op)
+		
+		print ("publish \"commit:" + arg + ".Qi -> " + arg + "/Qi\";", file=op)
 		print ("publish \"commit:" + arg + ".solar_gain -> " + arg + "/solar_gain\";", file=op)
-		print ("publish \"commit:" + arg + ".internal_gain -> " + arg + "/internal_gain\";", file=op)
-		print ("publish \"commit:" + arg + ".heat_cool_gain -> " + arg + "/heat_cool_gain\";", file=op)
 		print ("publish \"commit:" + arg + ".outdoor_temperature -> " + arg + "/outdoor_temperature\";", file=op)
 		print ("publish \"commit:" + arg + ".outdoor_rh -> " + arg + "/outdoor_rh\";", file=op)
 		print ("publish \"commit:" + MeterArg + ".voltage_12 -> " + MeterArg + "/voltage_12\";", file=op)
-		print ("publish \"commit:" + arg + ".hvac_load -> " + arg + "/hvac_load\";", file=op)
-		#print ("publish \"commit:" + arg + ".mass_temperature -> " + arg + "/mass_temperature\";", file=op)
-		#print ("publish \"commit:" + arg + ".air_temperature -> " + arg + "/air_temperature\";", file=op)
+		
 		print ("subscribe \"precommit:" + arg + ".system_mode <- controller_" + key + "/gridlabdSimulator"+str(i+1)+"_system_mode\";", file=op)
 		houseNumber = arg.split("_")
 	op.close()

@@ -390,17 +390,13 @@ def writeRegistration123 (filename, N):
 			
 			controllerDict['Dsystem'][k] = "gridlabdSimulator" + str(k+1)
 			
+			values['system_mode#'+ 'gridlabdSimulator' + str(k+1)] = {'topic':  "gridlabdSimulator" + str(k+1) + "/" + houseName + "/system_mode", 'default': 0.9, 'type': 'double', 'list': 'false'}
+			
+			values['Qi#'+ 'gridlabdSimulator' + str(k+1)] = {'topic':  "gridlabdSimulator" + str(k+1) + "/" + houseName + "/Qi", 'default': 0.9, 'type': 'double', 'list': 'false'}
 			values['solar_gain#'+ 'gridlabdSimulator' + str(k+1)] = {'topic':  "gridlabdSimulator" + str(k+1) + "/" + houseName + "/solar_gain", 'default': 0.9, 'type': 'double', 'list': 'false'}
-			values['internal_gain#'+ 'gridlabdSimulator' + str(k+1)] = {'topic':  "gridlabdSimulator" + str(k+1) + "/" + houseName + "/internal_gain", 'default': 0.9, 'type': 'double', 'list': 'false'}
-			values['heat_cool_gain#'+ 'gridlabdSimulator' + str(k+1)] = {'topic':  "gridlabdSimulator" + str(k+1) + "/" + houseName + "/heat_cool_gain", 'default': 0.9, 'type': 'double', 'list': 'false'}
 			values['RH#'+ 'gridlabdSimulator' + str(k+1)] = {'topic': "gridlabdSimulator" + str(k+1)  + "/" + houseName + "/outdoor_rh", 'default': 0, 'type': 'double', 'list': 'false'}
 			values['outdoor_temperature#'+ 'gridlabdSimulator' + str(k+1)] = {'topic': "gridlabdSimulator" + str(k+1)  + "/" + houseName + "/outdoor_temperature", 'default': 0.9, 'type': 'double', 'list': 'false'}
 			values['VActual#'+ 'gridlabdSimulator' + str(k+1)] = {'topic': "gridlabdSimulator" + str(k+1)  + "/" + MeterName + "/voltage_12", 'default': 120, 'type': 'double', 'list': 'false'}
-			
-			values['hvac_load#'+ 'gridlabdSimulator' + str(k+1)] = {'topic': "gridlabdSimulator" + str(k+1) + "/" + houseName + "/hvac_load", 'default': 0, 'type': 'double', 'list': 'false'}
-			
-			#values['air_temperature#'+ 'gridlabdSimulator' + str(k+1)] = {'topic': "gridlabdSimulator" + str(k+1) + "/" + houseName + "/air_temperature", 'default': air_temperature, 'type': 'double', 'list': 'false'}
-			#values['mass_temperature#'+ 'gridlabdSimulator' + str(k+1)] = {'topic': "gridlabdSimulator" + str(k+1)  + "/" + houseName + "/mass_temperature", 'default': 0.9, 'type': 'double', 'list': 'false'}
 			
 		singleControllerReg['values'] = values
 		controllerDict['registration'] = singleControllerReg

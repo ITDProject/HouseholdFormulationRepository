@@ -81,8 +81,7 @@ class hvac_controller:
 			# House forced terms 
 			self.house[temp]['RH'] = 0
 			self.house[temp]['Qs'] = 0
-			self.house[temp]['QiTotal'] = 0
-			self.house[temp]['QiHVAC'] = 0
+			self.house[temp]['Qi'] = 0
 			self.house[temp]['To'] = 0
 			self.house[temp]['VActual'] = 240
 			
@@ -268,30 +267,21 @@ class hvac_controller:
 
 	# ====================Obtain values from the broker ===========================
 	def subscribeGLD(self, title, value,time_granted):
-		if title.startswith('hvac_load'):
+		if title.startswith('system_mode'):
 			for k in range(len(self.controller['Dsystem'])):
-				if title.startswith('hvac_load#'+ self.controller['Dsystem'][k]):
-					print('value:', value, 'P:', self.get_number(value), flush = True)
-					#self.house[self.controller['Dsystem'][k]]['P'] = round(self.get_number(value),3)
-					self.house[self.controller['Dsystem'][k]]['systemmode'] = "OFF"
-					if self.get_number(value)!=0:
-						self.house[self.controller['Dsystem'][k]]['systemmode'] = "COOL"
-						# self.house[self.controller['Dsystem'][k]]['P_ON'] = round(self.get_number(value),3)
+				if title.startswith('system_mode#'+ self.controller['Dsystem'][k]):
+					#print('printing system_mode:', value, flush = True)
+					self.house[self.controller['Dsystem'][k]]['systemmode'] = value
+		if title.startswith('Qi'):
+			for k in range(len(self.controller['Dsystem'])):
+				if title.startswith('Qi#'+ self.controller['Dsystem'][k]):
+					#print('Qi:', value, self.get_number(value), flush = True)
+					self.house[self.controller['Dsystem'][k]]['Qi'] = self.get_number(value)
 		if title.startswith('solar_gain'):
 			for k in range(len(self.controller['Dsystem'])):
 				if title.startswith('solar_gain#'+ self.controller['Dsystem'][k]):
 					#print('Qs:', value, self.get_number(value), flush = True)
 					self.house[self.controller['Dsystem'][k]]['Qs'] = self.get_number(value)
-		if title.startswith('internal_gain'):
-			for k in range(len(self.controller['Dsystem'])):
-				if title.startswith('internal_gain#'+ self.controller['Dsystem'][k]):
-					#print('QiTotal:', value, self.get_number(value), flush = True)
-					self.house[self.controller['Dsystem'][k]]['QiTotal'] = self.get_number(value)
-		if title.startswith('heat_cool_gain'):
-			for k in range(len(self.controller['Dsystem'])):
-				if title.startswith('heat_cool_gain#'+ self.controller['Dsystem'][k]):
-					#print('QiHVAC:', value, self.get_number(value), flush = True)
-					self.house[self.controller['Dsystem'][k]]['QiHVAC'] = self.get_number(value)
 		if title.startswith('RH'):
 			for k in range(len(self.controller['Dsystem'])):
 				if title.startswith('RH#'+ self.controller['Dsystem'][k]):
@@ -313,9 +303,7 @@ class hvac_controller:
 			# Rg = self.house[self.controller['Dsystem'][k]]['Rg']
 			RH = self.house[self.controller['Dsystem'][k]]['RH']
 			Qs = self.house[self.controller['Dsystem'][k]]['Qs']
-			QiTotal = self.house[self.controller['Dsystem'][k]]['QiTotal']
-			QiHVAC = self.house[self.controller['Dsystem'][k]]['QiHVAC']
-			Qi = QiTotal - QiHVAC
+			Qi = self.house[self.controller['Dsystem'][k]]['Qi']
 			To = self.house[self.controller['Dsystem'][k]]['To']
 			VActual = self.house[self.controller['Dsystem'][k]]['VActual']
 			 
@@ -373,8 +361,7 @@ class hvac_controller:
 			QiHVACCal = - HVACPow + FanPow
 			
 			# print('PTotal Cal: ', PTotal, flush=True)
-			# print('VActual, RH, Qs, Qi, QiTotal, QiHVAC', VActual, RH, round(Qs,2), round(Qi,2), round(QiTotal,2), round(QiHVAC,2), flush = True )
-			# print('QiHVAC, QiHVACCal:', round(QiHVAC,2), round(QiHVACCal,2), flush = True) 
+			# print('VActual, RH, Qs, Qi', VActual, RH, round(Qs,2), round(Qi,2), flush = True )
 			# print('h2, mu:', h2, mu, flush=True)
 			
 			# pistar calculation
@@ -406,7 +393,7 @@ class hvac_controller:
 			self.house[self.controller['Dsystem'][k]]['TmCaseON'] = TmCaseON
 			
 			systemmode = self.house[self.controller['Dsystem'][k]]['systemmode']
-			#print('systemmode', systemmode, flush=True)
+			#print('printing systemmode:', systemmode, flush=True)
 			if systemmode == 'COOL':
 				self.fncs_publish['controller'][self.controller['name']]['state'] = "MayRunON"
 				self.fncs_publish['controller'][self.controller['name']]['P'] = PTotal
