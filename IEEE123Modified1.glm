@@ -1,0 +1,2276 @@
+#set minimum_timestep=300 				// default 1
+#set profiler=1
+#set randomseed=10
+
+//#set threadcount=1
+//#set double_format=%+.12lg 			// default "%+lg" to specify double format
+//#set random_number_generator=RNG3; 	// default RNG3
+//#set relax_naming_rules=1; 			// default 0
+//#set suppress_repeat_messages=1; 		// default 1
+
+//#set savefile="IEEE123Modified.xml"	// default ""
+//#set dumpfile="IEEE123Modified_E.xml"	// default "gridlabd.xml"
+//#set pauseatexit=1 					// default 0
+
+//#define stylesheet=http://gridlab-d.svn.sourceforge.net/viewvc/gridlab-d/trunk/core/gridlabd-2_0 //to view XML files on browser
+
+clock {
+	timezone CST+6CDT;
+	starttime '2003-07-1 00:00:00';
+	stoptime '2003-07-3 06:00:00';
+}
+
+#include "appliance_schedules.glm";
+module tape;		// includes recorders, metric collectors etc
+//module generators;
+//module market;
+module connection;
+
+module powerflow{
+solver_method FBS;
+//default_maximum_voltage_error 1e-3;
+warning_undervoltage 0.95 pu;
+warning_overvoltage 1.05 pu;
+line_limits TRUE;
+};
+
+module climate;
+module residential {
+implicit_enduses NONE;
+ANSI_voltage_check TRUE;
+};
+
+schedule water {
+          *  23-5 * 6-8 1-5 0.008;
+          *  6-7 * 6-8 1-5 0.075;
+          *  8-10 * 6-8 1-5 0.067;
+          *  11-12 * 6-8 1-5 0.042;
+          *  13-16 * 6-8 1-5 0.033;
+          *  17-20 * 6-8 1-5 0.058;
+          *  21-22 * 6-8 1-5 0.05;
+          
+}
+
+object climate {
+name "Des_Moines_Intl_AP";
+tmyfile "./weather/Des_Moines_Intl_AP.tmy3";
+interpolate QUADRATIC; // Yanda kept it as LINEAR but most glm examples use QUADRATIC e.g. TE_Challenge, IEEE_8500
+}
+
+object fncs_msg {
+     name gridlabdSimulator1;
+     parent network_node;
+     configure IEEE123Modified_Total1_FNCS_Config.txt;
+    option "transport:hostname localhost, port 5570";
+}
+
+//Phase Conductor for 1 thru 8: 336,400 26/7 ACSR
+object overhead_line_conductor:10001 {
+	geometric_mean_radius 0.0244  ;
+	resistance 0.30600;
+}
+
+//Phase Conductor for 9 thru 11: 1/0 ACSR
+object overhead_line_conductor:10009 {
+	geometric_mean_radius 0.004460  ;
+	resistance 1.12000;
+}	
+
+//Phase Conductor for neutral: 4/0 6/1 ACSR
+object overhead_line_conductor:10002 {
+	geometric_mean_radius 0.008140  ;
+	resistance 0.59200;
+}
+
+// Phase Conductor for 12: 1/0 AA,TS
+object underground_line_conductor:10003 { 
+	 outer_diameter 1.060000;
+	 conductor_gmr 0.011100;
+	 conductor_diameter 0.368000;
+	 conductor_resistance 0.970000;
+	 neutral_gmr 0.011100;
+	 neutral_resistance 0.970000;
+	 neutral_diameter 0.0640837;
+	 neutral_strands 6.000000;
+	 shield_gmr 0.000000;
+	 shield_resistance 0.000000;
+}
+
+// Overhead line configurations
+// ABCN
+object line_spacing:5001 {
+	distance_AB 2.5;
+	distance_AC 7.0;
+	distance_BC 4.5;
+	distance_AN 5.656854;
+	distance_BN 4.272002;
+	distance_CN 5.0;
+}
+
+// CABN
+object line_spacing:5002 {
+	distance_AB 4.5;
+	distance_AC 2.5;
+	distance_BC 7.0;
+	distance_AN 5.0;
+	distance_BN 4.272002;
+	distance_CN 5.656854;
+}
+
+// BCAN
+object line_spacing:5003 {
+	distance_AB 7.0;
+	distance_AC 4.5;
+	distance_BC 2.5;
+	distance_AN 5.0;
+	distance_BN 5.656854;
+	distance_CN 4.272002;
+}
+
+// CBAN
+object line_spacing:5004 {
+	distance_AB 4.5;
+	distance_AC 7.0;
+	distance_BC 2.5;
+	distance_AN 5.0;
+	distance_BN 4.272002;
+	distance_CN 5.656854;
+}
+
+// BACN
+object line_spacing:5005 {
+	distance_AB 2.5;
+	distance_AC 4.5;
+	distance_BC 7.0;
+	distance_BN 5.656854;
+	distance_AN 4.272002;
+	distance_CN 5.0;
+}
+
+// ACBN
+object line_spacing:5006 {
+	distance_AB 7.0;
+	distance_AC 2.5;
+	distance_BC 4.5;
+	distance_AN 5.656854;
+	distance_CN 4.272002;
+	distance_BN 5.0;
+}
+
+//ACN
+object line_spacing:5007 {
+	distance_AB 0.0;
+	distance_AC 7.0;
+	distance_BC 0.0;
+	distance_AN 5.656854;
+	distance_BN 0.0;
+	distance_CN 5.0;
+}
+
+//ABN
+object line_spacing:5008 {
+	distance_AB 7.0;
+	distance_AC 0.0;
+	distance_BC 0.0;
+	distance_AN 5.656854;
+	distance_BN 5.0;
+	distance_CN 0.0;
+}
+
+//AN
+object line_spacing:5009 {
+	distance_AB 0.0;
+	distance_AC 0.0;
+	distance_BC 0.0;
+	distance_AN 5.0;
+	distance_BN 0.0;
+	distance_CN 0.0;
+}
+
+//BN
+object line_spacing:50010 {
+	distance_AB 0.0;
+	distance_AC 0.0;
+	distance_BC 0.0;
+	distance_AN 0.0;
+	distance_BN 5.0;
+	distance_CN 0.0;
+}
+
+//CN
+object line_spacing:50011 {
+	distance_AB 0.0;
+	distance_AC 0.0;
+	distance_BC 0.0;
+	distance_AN 0.0;
+	distance_BN 0.0;
+	distance_CN 5.0;
+}
+
+//ABC
+object line_spacing:50012 {
+	distance_AB 0.5;
+	distance_AC 1.0;
+	distance_BC 0.5;
+	distance_AN 0.0;
+	distance_BN 0.0;
+	distance_CN 0.0;
+}
+
+
+object line_configuration:1001 {
+	conductor_A overhead_line_conductor:10001;
+	conductor_B overhead_line_conductor:10001;
+	conductor_C overhead_line_conductor:10001;
+	conductor_N overhead_line_conductor:10002;
+	spacing line_spacing:5001;
+}
+
+object line_configuration:1002 {
+	conductor_A overhead_line_conductor:10001;
+	conductor_B overhead_line_conductor:10001;
+	conductor_C overhead_line_conductor:10001;
+	conductor_N overhead_line_conductor:10002;
+	spacing line_spacing:5002;
+}
+
+object line_configuration:1003 {
+	conductor_A overhead_line_conductor:10001;
+	conductor_B overhead_line_conductor:10001;
+	conductor_C overhead_line_conductor:10001;
+	conductor_N overhead_line_conductor:10002;
+	spacing line_spacing:5003;
+}
+
+object line_configuration:1004 {
+	conductor_A overhead_line_conductor:10001;
+	conductor_B overhead_line_conductor:10001;
+	conductor_C overhead_line_conductor:10001;
+	conductor_N overhead_line_conductor:10002;
+	spacing line_spacing:5004;
+}
+
+object line_configuration:1005 {
+	conductor_A overhead_line_conductor:10001;
+	conductor_B overhead_line_conductor:10001;
+	conductor_C overhead_line_conductor:10001;
+	conductor_N overhead_line_conductor:10002;
+	spacing line_spacing:5005;
+}
+
+object line_configuration:1006 {
+	conductor_A overhead_line_conductor:10001;
+	conductor_B overhead_line_conductor:10001;
+	conductor_C overhead_line_conductor:10001;
+	conductor_N overhead_line_conductor:10002;
+	spacing line_spacing:5006;
+}
+
+object line_configuration:1007 {
+	conductor_A overhead_line_conductor:10001;
+	conductor_C overhead_line_conductor:10001;
+	conductor_N overhead_line_conductor:10002;
+	spacing line_spacing:5007;
+}
+
+object line_configuration:1008 {
+	conductor_A overhead_line_conductor:10001;
+	conductor_B overhead_line_conductor:10001;
+	conductor_N overhead_line_conductor:10002;
+	spacing line_spacing:5008;
+}
+
+object line_configuration:1009 {
+	conductor_A overhead_line_conductor:10009;
+	conductor_N overhead_line_conductor:10009;
+	spacing line_spacing:5009;
+}
+
+object line_configuration:10010 {
+	conductor_B overhead_line_conductor:10009;
+	conductor_N overhead_line_conductor:10009;
+	spacing line_spacing:50010;
+}
+
+object line_configuration:10011 {
+	conductor_C overhead_line_conductor:10009;
+	conductor_N overhead_line_conductor:10009;
+	spacing line_spacing:50011;
+}
+
+object line_configuration:10012 {
+	 conductor_A underground_line_conductor:10003;
+	 conductor_B underground_line_conductor:10003;
+	 conductor_C underground_line_conductor:10003;
+	 spacing line_spacing:50012;
+}
+
+
+//Define line objects 
+object overhead_line:  {
+     phases "BN";
+     name n1-2;
+     from n1;
+     to n2;
+     length 175;
+     configuration line_configuration:10010;
+}
+
+object overhead_line:  {
+     phases "CN";
+     name n1-3;
+     from n1;
+     to n3;
+     length 250;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n1-7;
+     from n1;
+     to n7;
+     length 300;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n3-4;
+     from n3;
+     to n4;
+     length 200;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n3-5;
+     from n3;
+     to n5;
+     length 325;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n5-6;
+     from n5;
+     to n6;
+     length 250;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n7-8;
+     from n7;
+     to n8;
+     length 200;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n8-12;
+     from n8;
+     to n12;
+     length 225;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n8-9;
+     from n8;
+     to n9;
+     length 225;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n8-13;
+     from n8;
+     to n13;
+     length 300;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n1401-14;
+     from n1401;
+     to n14;
+     length 425;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n13-34;
+     from n13;
+     to n34;
+     length 150;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n13-18;
+     from n13;
+     to n18;
+     length 825;
+     configuration line_configuration:1002;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n14-11;
+     from n14;
+     to n11;
+     length 250;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n14-10;
+     from n14;
+     to n10;
+     length 250;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n15-16;
+     from n15;
+     to n16;
+     length 375;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n15-17;
+     from n15;
+     to n17;
+     length 350;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n18-19;
+     from n18;
+     to n19;
+     length 250;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n18-21;
+     from n18;
+     to n21;
+     length 300;
+     configuration line_configuration:1002;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n19-20;
+     from n19;
+     to n20;
+     length 325;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n21-22;
+     from n21;
+     to n22;
+     length 525;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n21-23;
+     from n21;
+     to n23;
+     length 250;
+     configuration line_configuration:1002;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n23-24;
+     from n23;
+     to n24;
+     length 550;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n23-25;
+     from n23;
+     to n25;
+     length 275;
+     configuration line_configuration:1002;
+}
+ 
+object overhead_line:  {
+     phases "ACN";
+     name n2601-26;
+     from n2601;
+     to n26;
+     length 350;
+     configuration line_configuration:1007;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n25-28;
+     from n25;
+     to n28;
+     length 200;
+     configuration line_configuration:1002;
+}
+ 
+object overhead_line:  {
+     phases "ACN";
+     name n26-27;
+     from n26;
+     to n27;
+     length 275;
+     configuration line_configuration:1007;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n26-31;
+     from n26;
+     to n31;
+     length 225;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n27-33;
+     from n27;
+     to n33;
+     length 500;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n28-29;
+     from n28;
+     to n29;
+     length 300;
+     configuration line_configuration:1002;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n29-30;
+     from n29;
+     to n30;
+     length 350;
+     configuration line_configuration:1002;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n30-250;
+     from n30;
+     to n250;
+     length 200;
+     configuration line_configuration:1002;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n31-32;
+     from n31;
+     to n32;
+     length 300;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n34-15;
+     from n34;
+     to n15;
+     length 100;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABN";
+     name n35-36;
+     from n35;
+     to n36;
+     length 650;
+     configuration line_configuration:1008;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n35-40;
+     from n35;
+     to n40;
+     length 250;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n36-37;
+     from n36;
+     to n37;
+     length 300;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n36-38;
+     from n36;
+     to n38;
+     length 250;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n38-39;
+     from n38;
+     to n39;
+     length 325;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n40-41;
+     from n40;
+     to n41;
+     length 325;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n40-42;
+     from n40;
+     to n42;
+     length 250;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n42-43;
+     from n42;
+     to n43;
+     length 500;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n42-44;
+     from n42;
+     to n44;
+     length 200;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n44-45;
+     from n44;
+     to n45;
+     length 200;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n44-47;
+     from n44;
+     to n47;
+     length 250;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n45-46;
+     from n45;
+     to n46;
+     length 300;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n47-48;
+     from n47;
+     to n48;
+     length 150;
+     configuration line_configuration:1004;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n47-49;
+     from n47;
+     to n49;
+     length 250;
+     configuration line_configuration:1004;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n49-50;
+     from n49;
+     to n50;
+     length 250;
+     configuration line_configuration:1004;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n50-51;
+     from n50;
+     to n51;
+     length 250;
+     configuration line_configuration:1004;
+}
+
+object overhead_line:  {
+     phases "ABCN";			//undefined line segment
+     name n51-151;
+     from n51;
+     to n151;
+     length 700;
+     configuration line_configuration:1004;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n52-53;
+     from n52;
+     to n53;
+     length 200;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n53-54;
+     from n53;
+     to n54;
+     length 125;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n54-55;
+     from n54;
+     to n55;
+     length 275;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n54-57;
+     from n54;
+     to n57;
+     length 350;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n55-56;
+     from n55;
+     to n56;
+     length 275;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n57-58;
+     from n57;
+     to n58;
+     length 250;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n57-60;
+     from n57;
+     to n60;
+     length 750;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n58-59;
+     from n58;
+     to n59;
+     length 250;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n60-61;
+     from n60;
+     to n61;
+     length 550;
+     configuration line_configuration:1005;
+}
+ 
+object underground_line:  {
+     phases "ABC";
+     name n60-62;
+     from n60;
+     to n62;
+     length 250;
+     configuration line_configuration:10012;
+}
+ 
+object underground_line:  {
+     phases "ABC";
+     name n62-63;
+     from n62;
+     to n63;
+     length 175;
+     configuration line_configuration:10012;
+}
+ 
+object underground_line:  {
+     phases "ABC";
+     name n63-64;
+     from n63;
+     to n64;
+     length 350;
+     configuration line_configuration:10012;
+}
+ 
+object underground_line:  {
+     phases "ABC";
+     name n64-65;
+     from n64;
+     to n65;
+     length 425;
+     configuration line_configuration:10012;
+}
+ 
+object underground_line:  {
+     phases "ABC";
+     name n65-66;
+     from n65;
+     to n66;
+     length 325;
+     configuration line_configuration:10012;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n67-68;
+     from n67;
+     to n68;
+     length 200;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n67-72;
+     from n67;
+     to n72;
+     length 275;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n67-97;
+     from n67;
+     to n97;
+     length 250;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n68-69;
+     from n68;
+     to n69;
+     length 275;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n69-70;
+     from n69;
+     to n70;
+     length 325;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n70-71;
+     from n70;
+     to n71;
+     length 275;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n72-73;
+     from n72;
+     to n73;
+     length 275;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n72-76;
+     from n72;
+     to n76;
+     length 200;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n73-74;
+     from n73;
+     to n74;
+     length 350;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n74-75;
+     from n74;
+     to n75;
+     length 400;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n76-77;
+     from n76;
+     to n77;
+     length 400;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n76-86;
+     from n76;
+     to n86;
+     length 700;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n77-78;
+     from n77;
+     to n78;
+     length 100;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n78-79;
+     from n78;
+     to n79;
+     length 225;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n78-80;
+     from n78;
+     to n80;
+     length 475;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n80-81;
+     from n80;
+     to n81;
+     length 475;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n81-82;
+     from n81;
+     to n82;
+     length 250;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n81-84;
+     from n81;
+     to n84;
+     length 675;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n82-83;
+     from n82;
+     to n83;
+     length 250;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n84-85;
+     from n84;
+     to n85;
+     length 475;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n86-87;
+     from n86;
+     to n87;
+     length 450;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n87-88;
+     from n87;
+     to n88;
+     length 175;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n87-89;
+     from n87;
+     to n89;
+     length 275;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n89-90;
+     from n89;
+     to n90;
+     length 225;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n89-91;
+     from n89;
+     to n91;
+     length 225;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n91-92;
+     from n91;
+     to n92;
+     length 300;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n91-93;
+     from n91;
+     to n93;
+     length 225;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n93-94;
+     from n93;
+     to n94;
+     length 275;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n93-95;
+     from n93;
+     to n95;
+     length 300;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n95-96;
+     from n95;
+     to n96;
+     length 200;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n97-98;
+     from n97;
+     to n98;
+     length 275;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n98-99;
+     from n98;
+     to n99;
+     length 550;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n99-100;
+     from n99;
+     to n100;
+     length 300;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n100-450;
+     from n100;
+     to n450;
+     length 800;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n101-102;
+     from n101;
+     to n102;
+     length 225;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n101-105;
+     from n101;
+     to n105;
+     length 275;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n102-103;
+     from n102;
+     to n103;
+     length 325;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "CN";
+     name n103-104;
+     from n103;
+     to n104;
+     length 700;
+     configuration line_configuration:10011;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n105-106;
+     from n105;
+     to n106;
+     length 225;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n105-108;
+     from n105;
+     to n108;
+     length 325;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "BN";
+     name n106-107;
+     from n106;
+     to n107;
+     length 575;
+     configuration line_configuration:10010;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n108-109;
+     from n108;
+     to n109;
+     length 450;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n108-300;
+     from n108;
+     to n300;
+     length 1000;
+     configuration line_configuration:1003;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n109-110;
+     from n109;
+     to n110;
+     length 300;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n110-111;
+     from n110;
+     to n111;
+     length 575;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n110-112;
+     from n110;
+     to n112;
+     length 125;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n112-113;
+     from n112;
+     to n113;
+     length 525;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "AN";
+     name n113-114;
+     from n113;
+     to n114;
+     length 325;
+     configuration line_configuration:1009;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n135-35;
+     from n135;
+     to n35;
+     length 375;
+     configuration line_configuration:1004;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n149-1;
+     from n149;
+     to n1;
+     length 400;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n152-52;
+     from n152;
+     to n52;
+     length 400;
+     configuration line_configuration:1001;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n6701-67;
+     from n6701;
+     to n67;
+     length 350;
+     configuration line_configuration:1006;
+}
+ 
+object overhead_line:  {
+     phases "ABCN";
+     name n197-101;
+     from n197;
+     to n101;
+     length 250;
+     configuration line_configuration:1003;
+}
+
+
+
+
+
+//Create node only objects 
+object node:3 {
+     phases "CN";
+     name n3;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+ 
+object node:8 {
+     phases "ABCN";
+     name n8;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:13 {
+     phases "ABCN";
+     name n13;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:14 {
+     phases "AN";
+     name n14;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+
+object node:1401 {
+     phases "AN";
+     name n1401;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:15 {
+     phases "CN";
+     name n15;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+ 
+object node:18 {
+     phases "ABCN";
+     name n18;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+ 
+object node:21 {
+     phases "ABCN";
+     name n21;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:23 {
+     phases "ABCN";
+     name n23;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:25 {
+     phases "ABCN";
+     name n25;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:26 {
+     phases "ACN";
+     name n26;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+
+object node:2601 {
+     phases "ACN";
+     name n2601;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:27 {
+     phases "ACN";
+     name n27;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:36 {
+     phases "ABN";
+     name n36;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:40 {
+     phases "ABCN";
+     name n40;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:44 {
+     phases "ABCN";
+     name n44;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+ 
+object node:54 {
+     phases "ABCN";
+     name n54;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:57 {
+     phases "ABCN";
+     name n57;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+ 
+object node:61 {
+     phases "ABCN";
+     name n61;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:67 {
+     phases "ABCN";
+     name n67;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+
+object node:6701 {
+     phases "ABCN";
+     name n6701;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+  
+object node:72 {
+     phases "ABCN";
+     name n72;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:78 {
+     phases "ABCN";
+     name n78;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:81 {
+     phases "ABCN";
+     name n81;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+
+ 
+object node:89 {
+     phases "ABCN";
+     name n89;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:91 {
+     phases "ABCN";
+     name n91;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:93 {
+     phases "ABCN";
+     name n93;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+  
+object node:97 {
+     phases "ABCN";
+     name n97;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+  
+object node:101 {
+     phases "ABCN";
+     name n101;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+
+ 
+object node:105 {
+     phases "ABCN";
+     name n105;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+  
+object node:108 {
+     phases "ABCN";
+     name n108;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+  
+object node:110 {
+     phases "AN";
+     name n110;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+  
+object node:135 {
+     phases "ABCN";
+     name n135;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:149 {
+     phases "ABCN";
+     name n149;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+
+object node:1491 {
+     phases "ABCN";
+     name n1491;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+
+//object node:150 {
+//     phases "ABCN";
+//     name n150;
+//     bustype SWING;
+//     voltage_A 2401.7771;
+//     voltage_B -1200.8886-2080.000j;
+//     voltage_C -1200.8886+2080.000j;
+//     nominal_voltage 2401.7771;
+//}
+
+object substation {
+	name network_node;
+	phases ABCN;
+	nominal_voltage 2401;
+	positive_sequence_voltage 2401;
+	bustype SWING;
+	base_power 24MVA;
+	power_convergence_value 100VA;
+} 
+
+object node:151 {
+     phases "ABCN";
+     name n151;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+
+object node:152 {
+     phases "ABCN";
+     name n152;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:160 {
+     phases "ABCN";
+     name n160;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:195 {
+     phases "ABCN";
+     name n195;
+//     bustype SWING;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:197 {
+     phases "ABCN";
+     name n197;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:250 {
+     phases "ABCN";
+     name n250;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:251 {
+     phases "ABCN";
+     name n251;
+//   bustype SWING;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:300 {
+     phases "ABCN";
+     name n300;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:350 {
+     phases "ABCN";
+     name n350;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:450 {
+     phases "ABCN";
+     name n450;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:451 {
+     phases "ABCN";
+     name n451;
+//   bustype SWING;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object node:610 {
+     phases "ABCN";
+     name n610;
+     voltage_A 480.000+0j;
+     voltage_B -240.000-415.6922j;
+     voltage_C -240.000+415.6922j;
+     nominal_voltage 480.000;
+}
+
+object node:611 {
+     phases "ABCN";
+     name n611;
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     nominal_voltage 2401.7771;
+}
+
+// converting switch objects to overhead_lines to avoid warning with FBS
+
+// Switches
+//object switch:13152 {
+//     phases "ABCN";
+//     name n13-152;
+//     from n13;
+//     to n152;
+//     status CLOSED;
+//}
+
+object overhead_line:  {
+     phases "ABCN";
+     name n13-152;
+     from n13;
+     to n152;
+     length 1;
+     configuration line_configuration:1003;
+}
+
+//object switch:18135 {
+//     phases "ABCN";
+//     name n18-135;
+//     from n18;
+//     to n135;
+//     status CLOSED;
+//}
+
+object overhead_line:  {
+     phases "ABCN";
+     name n18-135;
+     from n18;
+     to n135;
+     length 1;
+     configuration line_configuration:1003;
+}
+
+//object switch:60160 {
+//     phases "ABCN";
+//     name n60-160;
+//     from n60;
+//     to n160;
+//     status CLOSED;
+//}
+
+object overhead_line:  {
+     phases "ABCN";
+     name n60-160;
+     from n60;
+     to n160;
+     length 1;
+     configuration line_configuration:1003;
+}
+
+//object switch:61611 {
+//     phases "ABCN";
+//     name n61-611;
+//     from n61;
+//     to n611;
+//     status CLOSED;
+//}
+
+object overhead_line:  {
+     phases "ABCN";
+     name n61-611;
+     from n61;
+     to n611;
+     length 1;
+     configuration line_configuration:1003;
+}
+
+//object switch:97197 {
+//     phases "ABCN";
+//     name n97-197;
+//     from n97;
+//     to n197;
+//     status CLOSED;
+//}
+
+object overhead_line:  {
+     phases "ABCN";
+     name n97-197;
+     from n97;
+     to n197;
+     length 1;
+     configuration line_configuration:1003;
+}
+
+//object switch:1491149 {
+//     phases "ABCN";
+//     name n1491-149;
+//     from n1491;
+//     to n149;
+//     status CLOSED;
+//}
+
+object overhead_line:  {
+     phases "ABCN";
+     name n1491-149;
+     from n1491;
+     to n149;
+     length 1;
+     configuration line_configuration:1003;
+}
+
+// commenting open switches - to avoid warning switch objects may not behave properly under FBS!
+//object switch:250251 {
+//     phases "ABCN";
+//     name n250-251;
+//     from n250;
+//     to n251;
+//     status OPEN;
+//}
+
+//object switch:450451 {
+//     phases "ABCN";
+//     name n450-451;
+//     from n450;
+//     to n451;
+//     status OPEN;
+//}
+
+// commenting open switches - to avoid warning n94 (id:8295) already has a link parented - this could give invalid answers in FBS! (to retain radial n/w)
+//object switch:5494 {
+//     phases "AN";
+//     name n54-94;
+//     from n54;
+//     to n94;
+//     status OPEN;
+//}
+
+// commenting open switches - to avoid warning n300 (id:191) already has a link parented - this could give invalid answers in FBS!
+//object switch:151300 {
+//     phases "ABCN";
+//     name n151-300;
+//     from n151;
+//     to n300;
+//     status OPEN;
+//}
+
+//object switch:300350 {
+//     phases "ABCN";
+//     name n300-350;
+//     from n300;
+//     to n350;
+//     status OPEN;
+//}
+
+//object switch:95195 {
+//     phases "ABCN";
+//     name n95-195;
+//     from n95;
+//     to n195;
+//     status OPEN;
+//}
+
+
+// Capacitors
+object load:8398 {
+       name n8398;
+       parent n83;
+       phases "ABCN";
+       voltage_A 2401.7771;
+       voltage_B -1200.8886-2080.000j;
+       voltage_C -1200.8886+2080.000j;
+       constant_impedance_A 0.00-28.8427j;
+       constant_impedance_B 0.00-28.8427j;
+       constant_impedance_C 0.00-28.8427j;
+       nominal_voltage 2401.7771;
+}
+  
+  
+   
+object load:8898 {
+       name n8898;
+       parent n88;
+       phases "AN";
+       voltage_A 2401.7771;
+       voltage_B -1200.8886-2080.000j;
+       voltage_C -1200.8886+2080.000j;      
+       constant_impedance_A 0.00-115.7067j;
+       nominal_voltage 2401.7771;
+}
+
+object load:9098 {
+       name n9098;
+       parent n90;
+       phases "BN";
+       voltage_A 2401.7771;
+       voltage_B -1200.8886-2080.000j;
+       voltage_C -1200.8886+2080.000j;      
+       constant_impedance_B 0.00-115.7067j;
+       nominal_voltage 2401.7771;
+}
+
+object load:9298 {
+       name n9298;
+       parent n92;
+       phases "CN";
+       voltage_A 2401.7771;
+       voltage_B -1200.8886-2080.000j;
+       voltage_C -1200.8886+2080.000j;      
+       constant_impedance_C 0.00-115.7067j;
+       nominal_voltage 2401.7771;
+}
+
+
+
+// Transformer
+object transformer_configuration:400 {
+	connect_type DELTA_DELTA;
+  	install_type PADMOUNT;
+  	power_rating 150;
+  	primary_voltage 4160;
+  	secondary_voltage 480;
+  	resistance 0.0127;
+  	reactance 0.0272;
+}
+  
+object transformer:611610 {
+  	phases "ABCN";
+  	name n611-610;
+  	from n611;
+  	to n610;
+  	configuration transformer_configuration:400;
+}
+
+
+
+// Regulators
+object regulator_configuration:1501490 {
+	connect_type 1;
+	band_center 120.000;
+	band_width 2.0;
+	time_delay 30.0;
+	raise_taps 16;
+	lower_taps 16;
+	current_transducer_ratio 700;
+	power_transducer_ratio 20;
+	compensator_r_setting_A 3.0;
+	compensator_x_setting_A 7.5;
+	compensator_r_setting_B 3.0;
+	compensator_x_setting_B 7.5;
+	compensator_r_setting_C 3.0;
+	compensator_x_setting_C 7.5;
+	CT_phase "ABC";
+	PT_phase "ABC";
+	regulation 0.05;
+	Control MANUAL;
+	Type A;
+	tap_pos_A 7;
+	tap_pos_B 7;
+	tap_pos_C 7;
+}
+  
+object regulator:1501491 {
+	 phases "ABC";
+	 from network_node;
+	 to n1491;
+	 configuration regulator_configuration:1501490;
+}
+
+
+object regulator_configuration:2526010 {
+	connect_type 1;
+	band_center 120.000;
+	band_width 1.0;
+	time_delay 30.0;
+	raise_taps 16;
+	lower_taps 16;
+	current_transducer_ratio 50;
+	power_transducer_ratio 20;
+	compensator_r_setting_A 0.4;
+	compensator_x_setting_A 0.4;
+	compensator_r_setting_C 0.4;
+	compensator_x_setting_C 0.4;
+	CT_phase "AC";
+	PT_phase "AC";
+	regulation 0.05;
+	Control MANUAL;
+	Type A;
+	tap_pos_A 0;
+	tap_pos_C -1;
+}
+  
+object regulator:252601 {
+	 phases "AC";
+	 from n25;
+	 to n2601;
+	 configuration regulator_configuration:2526010;
+}
+
+
+object regulator_configuration:914010 {
+	connect_type 1;
+	band_center 120.000;
+	band_width 2.0;
+	time_delay 30.0;
+	raise_taps 16;
+	lower_taps 16;
+	current_transducer_ratio 50;
+	power_transducer_ratio 20;
+	compensator_r_setting_A 0.4;
+	compensator_x_setting_A 0.4;
+	CT_phase "A";
+	PT_phase "A";
+	regulation 0.05;
+	Control MANUAL;
+	Type A;
+	tap_pos_A -1;
+}
+  
+object regulator:91401 {
+	 phases "A";
+	 from n9;
+	 to n1401;
+	 configuration regulator_configuration:914010;
+}
+
+object regulator_configuration:16067010 {
+	connect_type 1;
+	band_center 124.000;
+	band_width 2.0;
+	time_delay 30.0;
+	raise_taps 16;
+	lower_taps 16;
+	current_transducer_ratio 300;
+	power_transducer_ratio 20;
+	compensator_r_setting_A 0.6;
+	compensator_x_setting_A 1.3;
+	compensator_r_setting_B 1.4;
+	compensator_x_setting_B 2.6;
+	compensator_r_setting_C 0.2;
+	compensator_x_setting_C 1.4;
+	CT_phase "ABC";
+	PT_phase "ABC";
+	regulation 0.05;
+	Control MANUAL;
+	Type A;
+	tap_pos_A 8;
+	tap_pos_B 1;
+	tap_pos_C 5;
+}
+  
+object regulator:1606701 {
+	 phases "ABC";
+	 from n160;
+	 to n6701;
+	 configuration regulator_configuration:16067010;
+}
+
+
+object transformer_configuration {
+	name AS_config;
+	connect_type SINGLE_PHASE_CENTER_TAPPED;
+	install_type POLETOP;
+	powerA_rating 500;
+	primary_voltage 2401;
+	secondary_voltage 120.000;
+	impedance 0.006+0.0136j;
+     impedance1 0.012+0.0204j;
+     impedance2 0.012+0.0204j;
+}
+
+object transformer_configuration {
+	name BS_config;
+	connect_type SINGLE_PHASE_CENTER_TAPPED;
+	install_type POLETOP;
+	powerB_rating 500;
+	primary_voltage 2401;
+	secondary_voltage 120.000;
+	impedance 0.006+0.0136j;
+     impedance1 0.012+0.0204j;
+     impedance2 0.012+0.0204j;
+}
+
+object transformer_configuration {
+	name CS_config;
+	connect_type SINGLE_PHASE_CENTER_TAPPED;
+	install_type POLETOP;
+	powerC_rating 500;
+	primary_voltage 2401;
+	secondary_voltage 120.000;
+	impedance 0.006+0.0136j;
+     impedance1 0.012+0.0204j;
+     impedance2 0.012+0.0204j;
+}
+
+object triplex_line_conductor {
+	name tp_line_conductor;
+	resistance 0.97;
+	geometric_mean_radius 0.0111;
+};
+
+// Triplex Line
+object triplex_line_configuration {
+	name triplex_line_configuration_1;
+	conductor_1 tp_line_conductor;
+	conductor_2 tp_line_conductor;
+	conductor_N tp_line_conductor;
+	insulation_thickness 0.08;
+	diameter 0.368;
+}
+
+//#include "outputs_ieee123.glm";
+
+// choose house type 
+
+#include "feeder123_Small_Poor_Poor_927_1.glm";
+//#include "feeder123_Normal_Normal_Normal_927_1.glm";
+//#include "feeder123_Large_Good_Good_927_1.glm";
+
+//#include "feeder123_mix_927.glm";

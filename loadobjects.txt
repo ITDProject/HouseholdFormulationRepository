@@ -1,0 +1,867 @@
+
+//Create load objects
+object load:1 {
+     name 1;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:2 {
+     name 2;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:4 {
+     name 4;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:5 {
+     name 5;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_C -0.55781+9.2933j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:6 {
+     name 6;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_C 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:7 {
+     name 7;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:9 {
+     name 9;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:10 {
+     name 10;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_A 8.3272-4.1636j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:11 {
+     name 11;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_A 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:12 {
+     name 12;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:16 {
+     name 16;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:17 {
+     name 17;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:19 {
+     name 19;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:20 {
+     name 20;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_A 16.6543-8.3272j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:22 {
+     name 22;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_B 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:24 {
+     name 24;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:28 {
+     name 28;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_A 16.6543-8.3272j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:29 {
+     name 29;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_A 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:30 {
+     name 30;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:31 {
+     name 31;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:32 {
+     name 32;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:33 {
+     name 33;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_A 16.6543-8.3272j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:34 {
+     name 34;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_C 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:35 {
+     name 35;
+     phases "ABCD";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:37 {
+     name 37;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_A 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:38 {
+     name 38;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_B -7.7694-5.1297j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:39 {
+     name 39;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:41 {
+     name 41;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:42 {
+     name 42;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:43 {
+     name 43;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_B 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:45 {
+     name 45;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_A 8.3272-4.1636j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:46 {
+     name 46;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:47 {
+     name 47;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_A 14.5725-10.409j;
+     constant_current_B -16.3007-7.4157j;
+     constant_current_C 1.7282+17.8247j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:48 {
+     name 48;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_A 54.5672+38.9766j;
+     constant_impedance_B 54.5672+38.9766j;
+     constant_impedance_C 54.5672+38.9766j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:49 {
+     name 49;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 35000+25000j;
+     constant_power_B 70000+50000j;
+     constant_power_C 35000+25000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:50 {
+     name 50;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:51 {
+     name 51;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:52 {
+     name 52;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:53 {
+     name 53;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:55 {
+     name 55;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_A 230.7413+115.3707j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:56 {
+     name 56;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:58 {
+     name 58;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_B -7.7694-5.1297j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:59 {
+     name 59;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:60 {
+     name 60;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:62 {
+     name 62;
+     phases "ABC";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_C 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:63 {
+     name 63;
+     phases "ABC";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:64 {
+     name 64;
+     phases "ABC";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_B -28.2336-19.757j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:65 {
+     name 65;
+     phases "ABCD";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_A 327.4032+233.8595j;
+     constant_impedance_B 327.4032+233.8595j;
+     constant_impedance_C 163.7016+116.9297j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:66 {
+     name 66;
+     phases "ABC";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 75000+35000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:68 {
+     name 68;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:69 {
+     name 69;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:70 {
+     name 70;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:71 {
+     name 71;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:73 {
+     name 73;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:74 {
+     name 74;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_C 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:75 {
+     name 75;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:76 {
+     name 76;
+     phases "ABCD";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_A 31.4742-4.0341j;
+     constant_current_B -12.0192-16.8269j;
+     constant_current_C -8.5629+18.8224j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:77 {
+     name 77;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:79 {
+     name 79;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_A 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:80 {
+     name 80;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:82 {
+     name 82;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:83 {
+     name 83;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 20000+10000j;
+     constant_impedance_A 0.00-28.8427j;          //Shunt Capacitors
+     constant_impedance_B 0.00-28.8427j;
+     constant_impedance_C 0.00-28.8427j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:84 {
+     name 84;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:85 {
+     name 85;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:86 {
+     name 86;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:87 {
+     name 87;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:88 {
+     name 88;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     constant_impedance_A 0.00-115.7067j;         //Shunt Capacitor
+     nominal_voltage 2401.7771;
+}
+ 
+object load:90 {
+     name 90;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_B -15.5387-10.2595j;
+     constant_impedance_B 0.00-115.7067j;         //Shunt Capacitor
+     nominal_voltage 2401.7771;
+}
+ 
+object load:92 {
+     name 92;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     constant_impedance_C 0.00-115.7067j;         //Shunt Capacitor
+     nominal_voltage 2401.7771;
+}
+ 
+object load:94 {
+     name 94;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:95 {
+     name 95;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:96 {
+     name 96;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:98 {
+     name 98;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:99 {
+     name 99;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:100 {
+     name 100;
+     phases "ABCN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_C 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:102 {
+     name 102;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:103 {
+     name 103;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:104 {
+     name 104;
+     phases "CN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_C 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:106 {
+     name 106;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:107 {
+     name 107;
+     phases "BN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_B 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:109 {
+     name 109;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 40000+20000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:111 {
+     name 111;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 20000+10000j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:112 {
+     name 112;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_current_A 8.3272-4.1636j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:113 {
+     name 113;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_impedance_A 115.3707+57.6853j;
+     nominal_voltage 2401.7771;
+}
+ 
+object load:114 {
+     name 114;
+     phases "AN";
+     voltage_A 2401.7771;
+     voltage_B -1200.8886-2080.000j;
+     voltage_C -1200.8886+2080.000j;
+     constant_power_A 20000+10000j;
+     nominal_voltage 2401.7771;
+}
