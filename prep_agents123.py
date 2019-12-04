@@ -35,6 +35,8 @@ for i in range(NDsystems):
 		print ("publish \"commit:" + arg + ".outdoor_rh -> " + arg + "/outdoor_rh\";", file=op)
 		print ("publish \"commit:" + MeterArg + ".voltage_12 -> " + MeterArg + "/voltage_12\";", file=op)
 		
+		print ("publish \"commit:" + arg + ".hvac_load -> " + arg + "/hvac_load\";", file=op)
+		
 		print ("subscribe \"precommit:" + arg + ".system_mode <- controller_" + key + "/gridlabdSimulator"+str(i+1)+"_system_mode\";", file=op)
 		houseNumber = arg.split("_")
 	op.close()
