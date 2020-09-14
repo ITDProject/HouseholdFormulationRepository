@@ -8,8 +8,8 @@ Installation Instructions:
 
 		Python can be installed using any of the following choices:
 
-		Choice 1: Install Python using the Anaconda Distribution, available for downloading from
-		https://www.anaconda.com/distribution/ . 
+		Choice 1: Install Python using the Anaconda Distribution
+			  Available for downloading from https://www.anaconda.com/distribution/ . 
 		Check https://docs.anaconda.com/anaconda/install/windows/ for installation instructions.
 
 		Choice 2: Install Python using the Miniconda installer following the instructions given at https://conda.io/miniconda.html 
@@ -42,7 +42,7 @@ Installation Instructions:
 
 Steps involved in execution:
 
-	1. Generate distribution system feeder populated with households with the choice of 'Household Type' by executing the following
+	1. Generate distribution system feeder populated with households with the choice of 'Household Type' by executing the following:
 		python IEEE123_glm_yaml_bat_writer.py NDistSys Mix Type
 		The above commands depend on the following user-specified parameters: 
 			NDistSys - The number of distribution systems that are handled by the IDSO
@@ -54,14 +54,14 @@ Steps involved in execution:
 				1 - Low Structure Quality Type
 				2 - Medium Structure Quality Type
 				3 - High Structure Quality Type
-		(Example: python IEEE123_glm_yaml_bat_writer.py 1 0 2)
+		(Example usage: python IEEE123_glm_yaml_bat_writer.py 1 0 2)
     
 	2. Generate required additional files by executing the following command
 		python prep_agents123.py FileName NDistSys 
 		The above commands depend on the following user-specified parameters: 
 			FileName - The name of the distribution feeder generated in the above step (do not include .glm extension)
 			NDistSys - The number of distribution systems that are handled by the IDSO
-		(Example: python prep_agents123.py IEEEModified1 1)  
+		(Example usage: python prep_agents123.py IEEEModified1 1)  
     		
 		Outcomes: FNCS configuration file and json registration files for IDSO and households
 			Generated FNCS configuration txt file is needed for object fncs of main .glm file
