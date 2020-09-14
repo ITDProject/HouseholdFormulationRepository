@@ -30,7 +30,8 @@ Installation Instructions:
 
 		Note: For “version” command line prompts, Python requires the use of a double hyphen “- -version”.
 
-	2. Install GridLAB-D with FNCS as prerequisite by following the instructions at http://gridlab-d.shoutwiki.com/wiki/Building_GridLAB-D_on_Windows_with_MSYS2#Building_GridLAB-D_from_Source
+	2. Install GridLAB-D with FNCS as prerequisite by following the instructions at
+		http://gridlab-d.shoutwiki.com/wiki/Building_GridLAB-D_on_Windows_with_MSYS2#Building_GridLAB-D_from_Source
 
 
 Steps involved in execution:
