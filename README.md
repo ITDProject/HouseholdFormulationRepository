@@ -42,12 +42,12 @@ Installation Instructions:
 
 Steps involved in execution:
 
-	1. Generate distribution system feeder populated with households with the choice of 'Household Type' by executing the following command
+	1. Generate distribution system feeder populated with households with the choice of 'Household Type' by executing the following
 		python IEEE123_glm_yaml_bat_writer.py NDistSys Mix Type
 		The above commands depend on the following user-specified parameters: 
 			NDistSys - The number of distribution systems that are handled by the IDSO
 			Mix - Represents if the chosen households are a mix of different structure types or single structure type
-				0 - A single structure type, set by input parameter 'Type' described below, is chosen to populate the distribution system feeder. 
+				0 - A single structure type, set by input parameter 'Type' described below, is chosen to populate the distribution feeder
 				1 - A mix of structure types Low, Medium, High are used to populate the distribution system feeder
 			Type - Represents household's structure quality type; 
 				1 - Low Structure Quality Type
