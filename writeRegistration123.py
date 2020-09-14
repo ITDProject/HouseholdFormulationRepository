@@ -205,9 +205,9 @@ def writeRegistration123 (filename, N):
 	import shutil
 
 	NDsystems = N
-	AgentType = 'DSO'
+	AgentType = 'IDSO'
 	marketName = "1" 
-	DSOMsgName = "DSO_1"
+	IDSOMsgName = AgentType + "_" + marketName # "IDSO_1"
 	
 	folderName = "input"
 	ip = open (filename + ".glm", "r")
@@ -330,7 +330,7 @@ def writeRegistration123 (filename, N):
 				if isELECTRIC == True:
 					controller_name = houseName + "_thermostat_controller"
 					controllers[controller_name] = {}
-					mu_random = 1 # change it to random function
+					mu_random = 1 # can be changed to a random function based on required test cases
 					SHGCNom = set_window_shgc(glazing_layers, glazing_treatment, window_frame) 
 					Rg = set_window_Rvalue(glass_type, glazing_layers, window_frame) 
 					controllers[controller_name]['controller_information'] = {'marketName': marketName, 'houseName': houseName} 
@@ -377,9 +377,10 @@ def writeRegistration123 (filename, N):
 		# subscriptions
 		subscriptions = {}
 		auction = {}
-		marketName = controllers[key]['controller_information']['marketName'] # Retrieve market name fro controller input information
+		marketName = controllers[key]['controller_information']['marketName'] # Retrieve market name from controller input information
 		auction[marketName] = {}
-		auction[marketName]['retail_price'] = {'propertyType': 'double', 'propertyUnit': 'none', 'propertyValue': 0.0}
+		auction[marketName][houseName] = {}
+		auction[marketName][houseName]['retail_price'] = {'propertyType': 'double', 'propertyUnit': 'none', 'propertyValue': 0.0}
 		subscriptions[AgentType] = auction 
 		singleControllerReg['subscriptions'] = subscriptions
 		# Values recieved from house

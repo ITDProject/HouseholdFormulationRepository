@@ -31,7 +31,6 @@ class hvac_controller:
 			self.house[temp]['P'] = 0 # agentInitialVal['house_information']['P']
 			self.house[temp]['P_ON'] = 0 # agentInitialVal['house_information']['P']
 			self.house[temp]['db'] = 4 # agentInitialVal['house_information']['db']
-			self.house[temp]['theta'] = 10 # agentInitialVal['house_information']['theta']
 			
 			# House initial conditions 
 			self.house[temp]['systemmode'] = agentInitialVal['house_information']['system_mode']
@@ -94,7 +93,7 @@ class hvac_controller:
 			self.house[temp]['fan_design_airflow'] = 0
 			
 			
-			# House parameter initialization  - values will be given after the first time step, thereforely here set as default zero values
+			# House parameter initialization  - values will be given after the first time step, therefore here set as default zero values
 			self.house[temp]['prevTa'] = self.house[temp]['Ta']
 			self.house[temp]['TaCaseOFF'] = 72.5
 			self.house[temp]['TaCaseON'] = 68.5
@@ -104,15 +103,9 @@ class hvac_controller:
 			self.house[temp]['realPowerWh'] = 0 
 			self.house[temp]['PrevRealPowerWh'] = 0
 			
-			#Overall welfare parameters:
-			self.house[temp]['welfareparams'] = {}
-			for i in range(self.dayMax):
-				self.house[temp]['welfareparams'][i] = {'theta': self.house[temp]['theta'], 'lumpsum' : 0.0, 'EC':[], 'Discomfort':[]} #welfare parameters
-			self.house[temp]['welfareparams'][0]['theta'] = self.house[temp]['theta']
 			
 			#Overwriting initialized value
-			self.house[temp]['mu'] = 1
-			self.house[temp]['theta'] = 20
+			# self.house[temp]['mu'] = 1
 		
 		self.house['h2'] = 0.1 # util/(min-degF^2)
 		
@@ -214,6 +207,8 @@ class hvac_controller:
 			Cm = A * mf - 2 * VHa * A * h
 			Hm = hs * ((Awt-Ag-Ad) + Awt*IWR + (Ac*n)/ECR)
 			Ua = Ac/Rc + Af/Rf + Ag/Rg + Aw/Rw  + Ad/Rd + VHa*A*h*I
+			
+			print('Ca:', Ca, 'Cm:', Cm, 'Hm:', Hm, 'Ua:', Ua, flush = True)
 			
 			DIG = 167.09 * math.pow(A,0.442)
 			SHGC = Ag * SHGCNom * WET
@@ -360,8 +355,9 @@ class hvac_controller:
 			PTotal = round( P_HVAC+P_FAN, 3)
 			QiHVACCal = - HVACPow + FanPow
 			
-			# print('PTotal Cal: ', PTotal, flush=True)
-			# print('VActual, RH, Qs, Qi', VActual, RH, round(Qs,2), round(Qi,2), flush = True )
+			print('PTotal Cal: ', PTotal, flush=True)
+			print('FanPow:',FanPow, 'HVACPow:', HVACPow, flush = True)
+			print('VActual, RH, Qs, Qi', VActual, RH, round(Qs,2), round(Qi,2), flush = True )
 			# print('h2, mu:', h2, mu, flush=True)
 			
 			# pistar calculation
@@ -415,7 +411,7 @@ class hvac_controller:
 		#print('day:', self.day, 'prev day:', self.prevday, flush=True)
 		if "DSO" in fncs_sub_value_String:
 			for k in range(len(self.controller['Dsystem'])):
-				self.market['retail_price'] = fncs_sub_value_String['DSO'][self.market['name']]['retail_price']
+				self.market['retail_price'] = fncs_sub_value_String['DSO'][self.market['name']][self.controller['houseName']]['retail_price']
 				
 				retail_price = self.market['retail_price']
 				pistar = self.house[self.controller['Dsystem'][k]]['pistar']	
@@ -433,36 +429,7 @@ class hvac_controller:
 					systemmode = "COOL"
 					self.fncs_publish['controller'][self.controller['name']]['state'] = "COOL"
 					self.house[self.controller['Dsystem'][k]]['Ta'] = self.house[self.controller['Dsystem'][k]]['TaCaseON']
-					self.house[self.controller['Dsystem'][k]]['Tm'] = self.house[self.controller['Dsystem'][k]]['TmCaseON'] 
-				
-				##########        Alternative bid function ##########
-				
-				# theta = self.house[self.controller['Dsystem'][k]]['theta']
-				# TB = self.house[self.controller['Dsystem'][k]]['Tbliss']
-				# db = self.house[self.controller['Dsystem'][k]]['db']
-				# Ta = self.house[self.controller['Dsystem'][k]]['Ta']
-				# pistarH = round(theta * (Ta - TB) / db,2)
-				# pistar = pistarH
-				# if Ta >= TB + db:
-					# systemmode = "COOL"
-					# self.fncs_publish['controller'][self.controller['name']]['state'] = "COOL"
-					# self.house[self.controller['Dsystem'][k]]['Ta'] = self.house[self.controller['Dsystem'][k]]['TaCaseON']
-					# self.house[self.controller['Dsystem'][k]]['Tm'] = self.house[self.controller['Dsystem'][k]]['TmCaseON'] 
-				# elif TB - db >= Ta:
-					# systemmode = "OFF"
-					# self.fncs_publish['controller'][self.controller['name']]['state'] = "OFF"
-					# self.house[self.controller['Dsystem'][k]]['Ta'] = self.house[self.controller['Dsystem'][k]]['TaCaseOFF']  
-					# self.house[self.controller['Dsystem'][k]]['Tm'] = self.house[self.controller['Dsystem'][k]]['TmCaseOFF']
-				# elif retail_price > pistar:
-					# systemmode = "OFF"
-					# self.fncs_publish['controller'][self.controller['name']]['state'] = "OFF"
-					# self.house[self.controller['Dsystem'][k]]['Ta'] = self.house[self.controller['Dsystem'][k]]['TaCaseOFF']  
-					# self.house[self.controller['Dsystem'][k]]['Tm'] = self.house[self.controller['Dsystem'][k]]['TmCaseOFF']
-				# else:
-					# systemmode = "COOL"
-					# self.fncs_publish['controller'][self.controller['name']]['state'] = "COOL"
-					# self.house[self.controller['Dsystem'][k]]['Ta'] = self.house[self.controller['Dsystem'][k]]['TaCaseON']
-					# self.house[self.controller['Dsystem'][k]]['Tm'] = self.house[self.controller['Dsystem'][k]]['TmCaseON'] 
+					self.house[self.controller['Dsystem'][k]]['Tm'] = self.house[self.controller['Dsystem'][k]]['TmCaseON']
 				
 				self.house[self.controller['Dsystem'][k]]['systemmode'] = systemmode
 				print('setting pistar to:', pistar, flush = True)	

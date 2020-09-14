@@ -35,7 +35,7 @@ controller_obj =  hvac_controller(controllerDict,tmax,deltaT)
 time_granted = 0 # time variable for checking the retuned time from FNCS
 timeSim= 0
 flag1 = 1
-falg2 = 1
+flag2 = 1
 
 # Start simulation for each time step:
 while (time_granted < tmax):

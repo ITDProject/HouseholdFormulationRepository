@@ -19,7 +19,7 @@ suffix_gld = "&> gridlabd.log &)"
 metrics = sys.argv[1]
 
 for i in range(NDsystems):
-	op = open(sys.argv[1] + str(i+1) +"_FNCS_Config.txt", "w")
+	op = open(sys.argv[1] +"_FNCS_Config.txt", "w")
 	print ("publish \"commit:network_node.distribution_load -> distribution_load\";", file=op)
 	print ("publish \"commit:network_node.distribution_real_energy -> distribution_energy\";", file=op)
 	for key, value in controllers.items():
