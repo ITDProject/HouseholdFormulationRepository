@@ -24,7 +24,8 @@ Steps involved in execution:
 			FileName - The name of the distribution feeder generated in the above step (do not include .glm extension)
 			NDistSys - The number of distribution systems that are handled by the IDSO
 		(Example: python prep_agents123.py IEEEModified1 1)  
-    Outcomes: FNCS configuration file and json registration files for IDSO and households
+    		
+		Outcomes: FNCS configuration file and json registration files for IDSO and households
 			Generated FNCS configuration txt file is needed for object fncs of main .glm file
 				It contains subscriptions and publish items
 			Json files for IDSO and households
