@@ -31,7 +31,7 @@ Steps involved in execution:
 				IDSO json file contains needed input information for the IDSO 
 				Household json file contains household specific information (household attributes)
 	
-	3. Set the following parameters in the runDSO.bat/runITD.bat
+	3. Set the following parameters in the runDSO.bat
 		NDay - Number of days the simulation needs to be carried out
 		NHour - Number of additional hours the simulation needs to be carried out after the simulation is run for NDay
 		deltaT - Length (seconds) of each control-step of the Five-Step TES design
