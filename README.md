@@ -56,7 +56,7 @@ Steps involved in execution:
 				3 - High Structure Quality Type
 		(Example usage: python IEEE123_glm_yaml_bat_writer.py 1 0 2)
     
-	2. Generate required additional files by executing the following command
+	2. Generate required additional files by executing the following command:
 		python prep_agents123.py FileName NDistSys 
 		The above commands depend on the following user-specified parameters: 
 			FileName - The name of the distribution feeder generated in the above step (do not include .glm extension)
