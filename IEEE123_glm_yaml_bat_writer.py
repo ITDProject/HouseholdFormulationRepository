@@ -188,8 +188,8 @@ for i in range(NDsystems):
 	feeder_glm = 'IEEE123Modified' + str(NDsystems) + glm
 	f2 = open(feeder_glm,'w')
 
-	for i in lines_string:
-		print(i, file=f2)
+	for j in lines_string:
+		print(j, file=f2)
 
 	print('object fncs_msg {', file=f2)
 	print('     name gridlabdSimulator1;', file=f2)
