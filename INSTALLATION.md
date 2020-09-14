@@ -26,6 +26,6 @@ To install modules, use 'pip install ModuleName' or 'conda install ModuleName'.
 
 To uninstall modules, use 'pip uninstall ModuleName' or 'conda uninstall ModuleName'.
 
-Note: For “version” command line prompts, Python requires the use of a double hyphen “- -version” whereas Ant requires the use of a single hyphen “-version”. For Java, either option works.
+Note: For “version” command line prompts, Python requires the use of a double hyphen “- -version”.
 
 2. Install GridLAB-D
