@@ -1,5 +1,6 @@
 set apidir=C:\Users\swathi\Dropbox\ITD\HouseholdFormulationToUpload
 set logfilesdir=%apidir%\logfiles
+set plotfilesdir=%apidir%\plotfiles
 
 set "NDay=2"
 set "NHour=4"
@@ -18,6 +19,7 @@ set "TPLR=500"
 set "RefLoad=1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500 1500"
 
 md %logfilesdir% 2> nul
+md %plotfilesdir% 2> nul
 
 set FNCS_FATAL=no
 set FNCS_LOG_STDOUT=yes
