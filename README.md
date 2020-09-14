@@ -1,5 +1,4 @@
 # HouseholdFormulationRepository
-# HouseholdFormulationRepository
 
 Currently, this repository is only supported on Windows Operating System.
 
