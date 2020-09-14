@@ -1,4 +1,4 @@
-set apidir=C:\Users\swathi\Dropbox\ITD\HouseholdFormulationToUpload
+set apidir=YourLocationToParentDirectoryOfThisRepository
 set logfilesdir=%apidir%\logfiles
 set plotfilesdir=%apidir%\plotfiles
 
