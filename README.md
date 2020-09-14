@@ -8,9 +8,11 @@ Installation Instructions:
 
 		Python can be installed using any of the following choices:
 
-		Choice 1: Install Python using the Anaconda Distribution, available for downloading from https://www.anaconda.com/distribution/ Check https://docs.anaconda.com/anaconda/install/windows/ for installation instructions.
+		Choice 1: Install Python using the Anaconda Distribution, available for downloading from https://www.anaconda.com/distribution/ 
+		Check https://docs.anaconda.com/anaconda/install/windows/ for installation instructions.
 
-		Choice 2: Install Python using the Miniconda installer following the instructions given at https://conda.io/miniconda.html Note: Pay particular attention to how the conda package manager is used to install various required modules such as numpy.
+		Choice 2: Install Python using the Miniconda installer following the instructions given at https://conda.io/miniconda.html 
+		Note: Pay particular attention to how the conda package manager is used to install various required modules such as numpy.
 
 		Choice 3: Install standard Python from https://www.python.org/ . The optional ‘pip’ is needed to install modules such as numpy.
 
