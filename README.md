@@ -47,7 +47,8 @@ Steps involved in execution:
 		The above commands depend on the following user-specified parameters: 
 			NDistSys - The number of distribution systems that are handled by the IDSO
 			Mix - Represents if the chosen households are a mix of different structure types or single structure type
-				0 - A single structure type, set by input parameter 'Type' described below, is chosen to populate the distribution feeder
+				0 - A single structure type, set by input parameter 'Type' described below, is chosen to populate the 
+				distribution system feeder
 				1 - A mix of structure types Low, Medium, High are used to populate the distribution system feeder
 			Type - Represents household's structure quality type; 
 				1 - Low Structure Quality Type
