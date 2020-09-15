@@ -76,7 +76,7 @@ Steps involved in execution:
    (Example usage: python prep_agents123.py IEEEModified1 1)  
     		
    Outcomes: FNCS configuration txt file and json registration files for IDSO and households.
-   FNCS configuration txt file contains needed input information for configuring GridLAB-D subscriptions and publications. IDSO json file contains needed input information for the IDSO and Household json file contains household specific information (household attributes)
+   FNCS configuration txt file contains needed input information for configuring GridLAB-D subscriptions and publications. IDSO json file contains needed input information for the IDSO and Household json file contains household specific information (household attributes).
 	
 3. Set the following parameters in the runDSO.bat
    
