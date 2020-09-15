@@ -46,14 +46,15 @@ Steps involved in execution:
    
    NDistSys - The number of distribution systems that are handled by the IDSO
    
-   Mix - Represents if the chosen households are a mix of different structure types or single structure type
-   0 - A single structure type, set by input parameter 'Type' described below, is chosen to populate the distribution system feeder
-   1 - A mix of structure types Low, Medium, High are used to populate the distribution system feeder
+   Mix - Represents if the chosen households are a mix of different structure types or single structure type;
+   0 - A single structure type, set by input parameter 'Type' described below, is chosen to populate the distribution system feeder;
+   1 - A mix of structure types Low, Medium, High are used to populate the distribution system feeder;
 	 
    Type - Represents household's structure quality type; 
-   1 - Low Structure Quality Type
-   2 - Medium Structure Quality Type
-   3 - High Structure Quality Type
+   1 - Low Structure Quality Type;
+   2 - Medium Structure Quality Type;
+   3 - High Structure Quality Type;
+   
    (Example usage: python IEEE123_glm_yaml_bat_writer.py 1 0 2)
     
 2. Generate required additional files by executing the following command:
@@ -68,11 +69,8 @@ Steps involved in execution:
    
    (Example usage: python prep_agents123.py IEEEModified1 1)  
     		
-   Outcomes: FNCS configuration txt file and json registration files for IDSO and households
-             FNCS configuration txt file is needed for object fncs of main .glm file. It contains subscriptions and publish items.
-	     Json files for IDSO and households
-	          IDSO json file contains needed input information for the IDSO 
-		  Household json file contains household specific information (household attributes)
+   Outcomes: FNCS configuration txt file and json registration files for IDSO and households.
+   FNCS configuration txt file is needed for object fncs of main .glm file. It contains subscriptions and publish items. IDSO json file contains needed input information for the IDSO and Household json file contains household specific information (household attributes)
 	
 3. Set the following parameters in the runDSO.bat
    
