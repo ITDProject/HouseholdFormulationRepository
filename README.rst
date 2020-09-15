@@ -66,15 +66,22 @@ Steps involved in execution:
 		  Household json file contains household specific information (household attributes)
 	
 3. Set the following parameters in the runDSO.bat
+   
    NDay - Number of days the simulation needs to be carried out
+   
    NHour - Number of additional hours the simulation needs to be carried out after the simulation is run for NDay
+   
    deltaT - Length (seconds) of each control-step of the Five-Step TES design
+   
    NoOfHouses - Number of households connected to the distribution system feeder
+   
    NDsystems - Number of distribution systems monitored by the IDSO
+   
    C - Choose an appropriate case; 
    Set C to 0 for generating test case outcomes with a flat retail price. Also set FRP(cents/kWh) to user specified retail price 
    Set C to 1 for generating test case outcomes for 'Test Case 2: IDSO Peak Load Reduction Capabilities'. Also set PL(kW) and TPLR(kW) to user specified values
    Set C to 2 for generating test case outcomes for 'Test Case 3: IDSO Load Matching Capabilities'. Also set RefLoad
+   
    apidir - Set the path of HouseholdFormulationRepository folder to this parameter
 	
 4. Run all the distribution system processes by executing the following command:
