@@ -1,12 +1,12 @@
 # HouseholdFormulationRepository
 
-The code/data in this repository are provided in support of Ref. [1],  prepared as part of our ITD project. The details of project can be found at http://www2.econ.iastate.edu/tesfatsi/ITDProjectHome.htm
+The code/data in this repository are provided in support of Ref. [1],  prepared as part of our ITD project. The details of this project can be found at http://www2.econ.iastate.edu/tesfatsi/ITDProjectHome.htm
 
 The developers of the code are Swathi Battula and Leigh Tesfatsion, with early assistance from Rohit Reddy Takkala.
 
 [1] Swathi Battula, Leigh Tesfatsion, and Zhaoyu Wang (2020),  "A Customer-Centric Approach to Bid-Based Transactive Energy System Design,” *IEEE Transactions on Smart Grid* 11(6), pp. 4996-5008. DOI: 10.1109/TSG.2020.3008611. Working paper available at: https://lib.dr.iastate.edu/econ_workingpapers/75
 
-Currently, this repository is only supported on Windows Operating System.
+Currently, this repository is only supported on a Windows operating system.
 
 Installation Instructions:
 
