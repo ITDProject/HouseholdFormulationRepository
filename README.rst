@@ -1,6 +1,6 @@
 # HouseholdFormulationRepository
 
-The code/data in this repository are provided in support of Ref. [1],  prepared as part of our ITD project. The details of this project can be found at http://www2.econ.iastate.edu/tesfatsi/ITDProjectHome.htm
+The code/data in this repository are provided in support of Ref. [1], below, prepared as part of our Integrated Transmission and Distribution (ITD) project. Details about this project can be found at http://www2.econ.iastate.edu/tesfatsi/ITDProjectHome.htm
 
 The developers of the code are Swathi Battula and Leigh Tesfatsion, with early assistance from Rohit Reddy Takkala.
 
