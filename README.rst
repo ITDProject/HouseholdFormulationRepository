@@ -7,7 +7,7 @@ The developers of the code are Swathi Battula and Leigh Tesfatsion, with early a
 [1] Swathi Battula, Leigh Tesfatsion, and Zhaoyu Wang (2020),  "A Customer-Centric Approach to Bid-Based Transactive Energy System Design,” *IEEE Transactions on Smart Grid* 11(6), pp. 4996-5008. DOI: 10.1109/TSG.2020.3008611. Working paper available at: https://lib.dr.iastate.edu/econ_workingpapers/75
 
 Currently, the code provided in this repository is only supported on a Windows operating system.
-s
+
 Installation Instructions:
 
 1. Install Python
