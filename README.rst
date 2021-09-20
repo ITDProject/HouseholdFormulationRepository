@@ -94,7 +94,7 @@ Steps involved in execution:
    
    NoOfHouses - Number of households connected to the distribution system feeder
    
-   NDistSys - Number of distribution systems monitored by the IDSO
+   NDSystems - Number of distribution systems monitored by the IDSO
    
    C - Choose an appropriate case; 
    
