@@ -1,4 +1,4 @@
-BSD 3-Clause License
+HouseholdFormulation, BSD 3-Clause License
 
 All rights reserved.
 
